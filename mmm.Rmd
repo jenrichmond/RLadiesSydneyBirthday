@@ -1,0 +1,217 @@
+---
+title: "JR birthday"
+author: "Jen Richmond"
+date: "13/07/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+
+#Memes
+
+## Option 1: memer 
+
+The memer package by [Sam Tyner](https://github.com/sctyner/memer) allows you to replace text in popular memes with your own. 
+
+### install the package
+
+```{r eval=FALSE}
+devtools::install_github("sctyner/memer")
+```
+
+### load the package, get a list of available memes
+
+```{r}
+library(memer)
+meme_list()
+```
+
+### choose a meme
+```{r}
+
+meme_get("OprahGiveaway") 
+
+```
+
+### replace the text with your own
+```{r}
+meme_get("OprahGiveaway") %>%
+  meme_text_bottom("Happy Birthday \n R-Ladies Sydney!")
+```
+
+Some memes have more than 1 text field
+
+```{r}
+meme_get("TrumpBillSigning") %>% meme_text_trump("R-Ladies Sydney", "Happy Birthday")
+```
+
+##Option 2: meme
+
+[meme package](https://github.com/GuangchuangYu/meme/)
+
+[Vignette](https://cran.r-project.org/web/packages/meme/vignettes/meme.html)
+
+### install package
+```{r eval = FALSE}
+devtools::install_github("GuangchuangYu/meme")
+```
+
+### load the package
+
+```{r}
+library(meme)
+```
+
+ALso need sysfonts package. Ran into problems, fixed on my Mac by installing XQuartz. See [issue here](https://github.com/GuangchuangYu/hexSticker/issues/18)
+
+Load an image
+```{r}
+#vignette example
+pic1 <- system.file("success.jpg", package="meme")
+ 
+```
+Add the text
+```{r}
+meme(pic1, "code", "all the things!")
+```
+
+Choose ANY image
+
+```{r}
+meme("kitten.jpg", "am i in your way?") %>%
+  meme_save("kitty.jpg")
+
+```
+
+#Option 3: memery 
+
+https://github.com/leonawicz/memery
+
+This is a shiny app based meme maker. [Vignette here](https://cran.r-project.org/web/packages/memery/vignettes/memery.html). 
+
+
+magick package is recommended
+
+### install the package
+```{r}
+install.packages("memery")
+```
+
+### load the package and shiny app
+
+```{r}
+library(memery)
+
+```
+
+Define a pic and txt, then the meme function overlays txt on pic and saves to jpg. Can get pic from your machine or the web 
+```{r}
+#load pic from package 
+pic <- system.file("philosoraptor.jpg", package = "memery")
+#make list of txt possibilities
+txt <- c("What to call my R package?", "Perhaps...")
+
+#overlay txt option 1 on pic and save to jpg
+meme(pic, txt[1], "meme1.jpg")
+
+```
+
+```{r}
+#get image from the web
+web <- "https://imgflip.com/s/meme/Philosoraptor.jpg"
+#overlay txt option 2 on the web image
+meme(web, txt[2], "meme2.png")
+```
+
+```{r}
+#define new txt possibilities
+
+txt2 <- c("Are you sure you need to work?", "Am I in your way?")
+# overlay top and bottom option on kitten image =, save to jpg
+meme("kitten.jpg", txt2, "kitty2.jpg")
+
+clrs <- c("orange", "white")
+meme("kitten.jpg", txt2, "meme3.jpg", col = clrs[1], shadow = clrs[2])
+
+```
+
+
+
+
+
+
+
+
+#Option 4: meme package II
+
+This package is not being maintained, and the API to memecaptain for templates doesn't work. 
+
+Looking for a new maintainer!
+https://github.com/leeper/meme
+
+
+memery package: 
+
+note also need showtext and sysfonts packages
+
+
+
+
+
+
+#Mario
+
+https://github.com/rasmusab/beepr
+```{r}
+
+library(beepr)
+
+beep(8)
+```
+
+"ping"
+"coin"
+"fanfare"
+"complete"
+"treasure"
+"ready"
+"shotgun"
+"mario"
+"wilhelm"
+"facebook"
+"sword"
+
+#Messages
+
+devtools::install_github("gaborcsardi/praise")
+
+```{r}
+library(praise
+        )
+
+praise()
+```
+
+#Goodshirt API to quotes from The Good Place
+```{r}
+devtools::install_github("adam-gruer/goodshirt")
+```
+
+```{r}
+library(goodshirt)
+library(cowsay)
+library(magrittr)
+
+soul_squad() 
+```
+
+
+
+#More
