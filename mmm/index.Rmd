@@ -19,7 +19,34 @@ output:
     padding: 1em 4em 1em 4em;
 }
 </style>
+---
+class: split-two white
 
+.column.bg-main1[.content.center[
+<br>
+
+# 3 Things
+
+-  Memes (how to use R to put random words on random images to great effect)
+
+- Messages (how to have RStudio make you laugh and give you praise)
+
+- Mario (how to have mario tell you when you script is done)
+
+]]
+.column.bg-main2[.content.vmiddle.center[
+
+```{r echo=FALSE, out.width= "400px"}
+knitr::include_graphics("three.png")
+```
+ 
+<br><br>
+
+
+
+]]
+
+---
 # 1. Memes
 
 ```{r echo=FALSE, out.width= "600px"}
@@ -217,9 +244,6 @@ beepr::beep()
 ```
 
 ---
-
-You can choose from a range of sounds. 
-
 1. "ping"
 2. "coin"
 3. "fanfare"
@@ -233,10 +257,14 @@ You can choose from a range of sounds.
 
 ```{r}
 beepr::beep("mario")
+#or
+beepr::beep(8)
 ```
 
----
+[Link](https://youtu.be/Rc1t-MeVcjo) to youtube
 
+
+---
 #Thanks! 
 
 
