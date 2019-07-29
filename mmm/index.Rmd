@@ -12,6 +12,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
+class: center, middle
 
 <style type="text/css">
 .remark-slide-content {
@@ -19,6 +20,11 @@ output:
     padding: 1em 4em 1em 4em;
 }
 </style>
+
+# You can find these slides at *https://tinyurl.com/birthdaymmm* 
+
+
+
 ---
 class: split-two white
 
@@ -272,4 +278,3 @@ beepr::beep(8)
 knitr::include_graphics("https://media.giphy.com/media/qfBrXyuWoNXIQ/giphy.gif")
 ```
 
----
