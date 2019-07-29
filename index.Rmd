@@ -44,7 +44,7 @@ class: split-two white
 # Lightning talk 1.
 
 ```{r echo=FALSE, out.width= "400px"}
-knitr::include_graphics("pics/sarah.jpg")
+knitr::include_graphics("sarah.jpg")
 ```
 
 # Sarah Romanes
