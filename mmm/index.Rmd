@@ -23,6 +23,10 @@ class: center, middle
 
 # You can find these slides at *https://tinyurl.com/birthdaymmm* 
 
+```{r echo=FALSE, out.width= "400px"}
+knitr::include_graphics("sesame.png")
+```
+
 
 
 ---
@@ -123,9 +127,7 @@ memery::meme("kitten.jpg", txt,
 knitr::include_graphics("meme.jpg")
 ```
  
-<br><br>
 
-]]
 
 ---
 class: split-two white
@@ -269,12 +271,32 @@ beepr::beep(8)
 
 [Link](https://youtu.be/Rc1t-MeVcjo) to youtube
 
-
 ---
-#Thanks! 
+class: split-two white
 
-
-```{r echo=FALSE, out.width= "500px"}
+.column.bg-main1[.content.center[
+<br>
+```{r echo=FALSE, out.width= "400px"}
 knitr::include_graphics("https://media.giphy.com/media/qfBrXyuWoNXIQ/giphy.gif")
 ```
 
+]]
+.column.bg-main2[.content.vmiddle.center[
+
+
+#Big Thanks to...
+
+Grace Luo and everyone at Nous Group
+
+My co-founders Lisa, Dani, and Steph
+
+Everyone on #rstats twitter 
+
+(special shout outs to Emi, Sarah, and Alison Hill) for helping me with my slide woes!
+
+And... all of you! 
+
+
+<br><br>
+
+]]
