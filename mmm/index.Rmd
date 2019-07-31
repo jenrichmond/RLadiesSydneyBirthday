@@ -127,7 +127,9 @@ memery::meme("kitten.jpg", txt,
 knitr::include_graphics("meme.jpg")
 ```
  
+<br><br>
 
+]]
 
 ---
 class: split-two white
@@ -208,7 +210,9 @@ usethis::edit_r_profile()
 ---
 
 ### Customise your .rprofile file, save and close the file, then restart R
-I put a copy of my .rprofie on [git here](https://github.com/jenrichmond/RLadiesSydneyBirthday/tree/master/memes_messages_mario)
+I put a copy of my .rprofie on [git here](https://github.com/jenrichmond/RLadiesSydneyBirthday/tree/master/mmm)
+
+
 ```{r eval = FALSE}
 #start with a quote from The Good Place (requires goodshirt package) 
 #spoken by a random ASCII animal (requires cowsay package)
