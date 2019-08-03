@@ -1,0 +1,500 @@
+---
+output: 
+  pdf_document:
+    fig_caption: false
+---
+
+\centering
+```{r, echo=FALSE, results = "asis"}
+cat("\\newgeometry{left=.5cm,right=.5cm,top=.5cm,bottom=.5cm}")
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/logo.jpg")
+cat("\\restoregeometry")
+```
+\clearpage
+
+---
+header-includes: |
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhead[CO,CE]{Vikera Tequila}
+    \fancyfoot[LE,RO]{www.vikeratequila.com}
+    \fancyfoot[LE,LO]{info@vikeratequila.com}
+    \fancyfoot[CO,CE]{\thepage}
+    \thispagestyle{empty}
+fontfamily: mathpple
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+require(plyr)
+require(ggplot2)
+require(data.table)
+require(latex)
+
+setwd("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses")
+vikeng <- as.data.table(read.csv("vikera_english_data.csv"))
+
+
+v.high <- rgb(99/255, 190/255, 122/255, 1) #63BE7A
+high <- rgb(178/255, 220/255, 130/255, 1) #B2DC82
+mod <- rgb(255/255, 235/255, 133/255, 1) #FFEB87
+low <- rgb(255/255, 173/255, 120/255, 1) #FFAD78
+v.low <- rgb(248/255, 105/255, 107/255, 1) #F8696B
+```
+#Philanthropy Report
+###4/30/2019
+
+\raggedright
+The following report was created to better visualize the Vikera English Class survey response data in order to assess student satisfaction and priorities, in hopes of improving the learning experience as well as ensuring the current philanthropy project is currently the most needed. This data should be considered to understand the current status of the philanthropy project incongruence with other qualitative factors of working at Vinos and Licores Aztecas (staff change over, overall morale, change of job descriptions, change of processes, etc.)  
+
+All charts are presented in percentage bar charts (showing what percentage of participants responded in that way) with scales running from Extremely satisfied to Poor (or similar) and should be considered before taking any future action.   
+
+Future surveys may consider questions that allow for deeper analysis and will allow for time series data visualization and comparisons.   
+
+Level 1: n = 13  
+Level 2: n = 8  
+Level 3: n = 7  
+\vspace{30pt}
+```{r pressure, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("pic.jpg")
+```
+\newpage
+
+##Overall
+
+Overall, the second level of the course is rated positively with 85.7% of students rating it as Very Good and 14% of students rating it as Excellent. This is a positive response for the overall evaluation of the course level, however it is backsliding from the previous level of the course. 
+
+This backslide is not an overall concern, but should be monitored going forward to ensure overall approval of the course remains at a high standard. Every other metric of the course has decreased in Level 3.
+
+The sample size has continued decrease, which could be affecting the overall percentage of responses. Ideally, the number of participants will stagnate or increase going forward.  
+
+\vspace{50pt}
+
+```{r, echo=FALSE}
+####Overall####
+
+vikeng$course_overall <- factor(vikeng$course_overall, levels = c("excellent", 
+                                                              "very good", 
+                                                              "good",
+                                                              "fair",
+                                                              "poor"))
+
+vikeng$course_overall <- revalue(vikeng$course_overall, c("excellent" = "Excellent", "very good" = "Very Good", 
+                                                    "good" = "Good", "fair" = "Fair", "poor" = "Poor"))
+
+
+ggplot(vikeng, aes(x= course_overall, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="Overall, how would you rate the course?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+
+```
+\vspace{30pt}
+
+```{r, echo=FALSE, out.width = '100%'}
+
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+
+
+\newpage
+
+##Utility
+The usefulness of the course material in Level 3 was rated positively, but experienced a slip as 20% more participants responded Very Useful than in Level 2. Overall, the usefulness is rated positively, but should be monitored to ensure a high standard is being met.
+
+Although one way the usefulness could increase is if more relevant opportunities to use the language were created, it may be helpful to assess the participants' goals for learning the language and what they would ultimately expect to do with the language. 
+
+If the ultimate goal is to be able to use English in the workplace to be able to increase future career opportunities (this would be my assumption and our original intention with organizing the English classes), than it may be useful to encourage using the language in the workplace as long as it does not effect business processes.
+
+
+\vspace{50pt}
+```{r, echo=FALSE}
+#####Course Utility###
+vikeng$useful_material <- factor(vikeng$useful_material, levels = c("extremely useful", 
+                                                                  "very useful", 
+                                                                  "somewhat useful",
+                                                                  "not so useful",
+                                                                  "not at all useful"))
+
+vikeng$useful_material <- revalue(vikeng$useful_material, c("extremely useful" = "Extremely Useful", 
+                                                          "very useful" = "Very Useful", 
+                                                          "somewhat useful" = "Somewhat Useful", 
+                                                          "not so useful" = "Not so useful", 
+                                                          "not at all useful" = "Not at all useful"))
+
+
+ggplot(vikeng, aes(x= useful_material, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="How useful was the course material?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+\vspace{30pt}
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+\newpage 
+
+##Confidence
+The feeling of confidence has gained a broader spread across the levels of confidence, ranging from Extremely confident to Slightly confident. This shows a decrease in confidence using the course material.
+
+This could be due to the course material increasing in difficulty as the participants progress through the courses. More opportunities to practice would be helpful, however the participants should also take the initiative to do their own self-directed learning to progress their understanding of the language.
+
+We also previously discussed investing in empowerment and self-confidence classes for future philanthropy projects with Vikera. This could be helpful for personal self-confidence, but participants would still benefit from utilizing and practicing the language as much as possible.
+
+\vspace{50pt}
+```{r echo=FALSE}
+###Confidence###
+vikeng$confidence <- factor(vikeng$confidence, levels = c("extremely confident", 
+                                                                    "quite confident", 
+                                                                    "somewhat confident",
+                                                                    "slightly confident",
+                                                                    "not at all confident"))
+
+vikeng$confidence <- revalue(vikeng$confidence, c("extremely confident" = "Extremely Confident", 
+                                                  "quite confident" = "Quite Confident", 
+                                                  "somewhat confident" = "Somewhat Confident", 
+                                                  "slightly confident" = "Slightly Confident", 
+                                                  "not at all confident" = "Not at all confident"))
+
+
+ggplot(vikeng, aes(x= confidence, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="How confident do you feel with using the material you've learned?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+```
+\vspace{30pt}
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+\newpage
+
+##Clarity
+The clarity of the instructor's explanation of the course material is fluctuating. Although, fewer respondents have selected Somewhat Clearly in level 2 as they did in level 1, there is a significant change towards more students responding Very Clearly as opposed to Extremely Clearly. However in level 3, more participants responded Extremely Clearly and Somewhat Clearly with most participants responding that the instructor's explanation was Very Clear.
+
+This inconsistency could be growing pains of learning the language as the levels become more difficult. This is something to monitor to ensure clarity does not decrease more than the current. Consistency with hearing and using the language would allow for better understanding of the teacher's instructions.
+
+
+\vspace{50pt}
+```{r echo=FALSE}
+####Instructor Clarity####
+vikeng$instructor_clarity <- factor(vikeng$instructor_clarity, levels = c("extremely clearly", 
+                                                          "very clearly", 
+                                                          "somewhat clearly",
+                                                          "not so clearly",
+                                                          "not at all clearly"))
+
+vikeng$instructor_clarity <- revalue(vikeng$instructor_clarity, c("extremely clearly" = "Extremely Clearly", 
+                                                  "very clearly" = "Very Clearly", 
+                                                  "somewhat clearly" = "Somewhat Clearly", 
+                                                  "not so clearly" = "Not so clearly", 
+                                                  "not at all clearly" = "Not at all clearly"))
+
+
+ggplot(vikeng, aes(x= instructor_clarity, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="How clearly did the instructor explain the course material?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+```
+
+\vspace{30pt}
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+
+\newpage 
+
+##Speed
+Although the clarity of the instructor has dipped, it has unanimously been agreed upon that the course is at the right speed. 
+
+This would bring about a couple assumptions: The participants who have continued to commit to attending the classes are at a similar ability level and are able to follow along as a unit. Although, the participants are able to follow along with the course activities, there still may be confusion when it comes to how the instructor is communicating. 
+
+The teacher could be challenging the class with slightly more advanced vocabulary and concepts to continue to test the students' skills while maintaining a learning speed that is at the right level for the students.
+
+\vspace{50pt}
+```{r echo=FALSE}
+vikeng$instructor_speed <- factor(vikeng$instructor_speed, levels = c("much too fast", 
+                                                                          "too fast", 
+                                                                          "the right speed",
+                                                                          "too slow",
+                                                                          "much too slow"))
+
+vikeng$instructor_speed <- revalue(vikeng$instructor_speed, c("much too fast" = "Much too fast", 
+                                                              "too fast" = "Too fast", 
+                                                              "the right speed" = "The right speed", 
+                                                              "too slow" = "Too slow", 
+                                                              "much too slow" = "Much too slow"))
+
+
+ggplot(vikeng, aes(x= instructor_speed, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="Was the speed with which your instructor \n presented the course material too fast, too slow, or about right?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+```
+
+\vspace{30pt}
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+
+\newpage
+
+##Voicing Opinions
+There is a slight backslide in how comfortable the participants feel voicing their opinions in class. However, with the slightly smaller sample size, it appears only one student is feeling less comfortable and Megan will speak with the teacher directly to ask if a little bit more attention can be given to those students who are expressing concern.
+
+This metric is closely aligned to the confidence metric and future reports can look at how these variables compare to one another once more data is collected. There is a correlation starting to form between confidence and voicing opinions, but there is not substantial evidence at this time.
+
+\vspace{50pt} 
+
+```{r echo=FALSE}
+###COMFORTABLE###
+vikeng$opinions <- factor(vikeng$opinions, levels = c("extremely comfortable", 
+                                                                      "very comfortable", 
+                                                                      "somewhat comfortable",
+                                                                      "not so comfortable",
+                                                                      "not at all comfortable"))
+
+vikeng$opinions <- revalue(vikeng$opinions, c("extremely comfortable" = "Extremely comfortable", 
+                                              "very comfortable" = "Very comfortable", 
+                                              "somewhat comfortable" = "Somewhat comfortable", 
+                                              "not so comfortable" = "Not so comfortable", 
+                                              "not at all comfortable" = "Not at all comfortable"))
+
+
+ggplot(vikeng, aes(x= opinions, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="How comfortable do you feel voicing your opinions in class?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+```
+
+\vspace{30pt}
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+
+\newpage 
+
+##Importance
+There was a significant increase in perceived importance of the English classes from Level 1 to Level 2. Although there is still a positive response for Level 3, the responses show a slip from Level 2. This is not an alarming concern at this stage, but it is something to monitor in case of continuous decline.
+
+If importance continues to decrease, I would consider adding a question to the evaluation that evaluates what is more important. Is it something we can assist or support, or is it that external factors (work, home life etc.) have taken precedent.
+ 
+\vspace{50pt}
+```{r echo=FALSE}
+###IMPORTANCE####
+vikeng$importance <- factor(vikeng$importance, levels = c("extremely important", 
+                                                          "very important", 
+                                                          "somewhat important",
+                                                          "not so important",
+                                                          "not at all important"))
+
+vikeng$importance <- revalue(vikeng$importance, c("extremely important" = "Extremely important", 
+                                                  "very important" = "Very important", 
+                                                  "somewhat important" = "Somewhat important", 
+                                                  "not so important" = "Not so important", 
+                                                  "not at all important" = "Not at all important"))
+
+
+ggplot(vikeng, aes(x= importance, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="How important are English classes for you right now?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+```
+
+\vspace{30pt}
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+\newpage
+
+##Worth
+The worth of the classes was positively reviewed for Level 3, but there was backsliding with 45% more participants responding Very worth it. This is not an alarming change, but should be monitored for possible future decline.
+
+This question was added to the survey for Level 2 in order to better assess if the classes were worth the time the students were putting in. This will be a very important metric to assess motivation of the students as well as where their priorities lay. If priorities shift in future, we will have to reassess if this is the best skill-building project to be investing in.
+ 
+\vspace{50pt}
+```{r echo=FALSE}
+###WORTH####
+vikeng$worth <- factor(vikeng$worth, levels = c("extremely worth it", 
+                                                          "very worth it", 
+                                                          "somewhat worth it",
+                                                          "not so worth it",
+                                                          "not at all worth it"))
+
+vikeng$worth <- revalue(vikeng$worth, c("extremely worth it" = "Extremely worth it", 
+                                        "very worth it" = "Very worth it", 
+                                        "somewhat worth it" = "Somewhat worth it", 
+                                        "not so worth it" = "Not so worth it", 
+                                        "not at all worth it" = "Not at all worth it"))
+
+
+ggplot(vikeng, aes(x= worth, group = course)) + 
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") +
+  geom_text(aes( label = scales::percent(..prop..),
+                 y= ..prop.. ), stat= "count", vjust = -.5, size = 3) +
+  labs(x ="", y = "", title ="Was the English class worth your time?", fill="") +
+  facet_grid(~course)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(drop = FALSE)+
+  scale_fill_manual(values=c("#63BE7A", "#B2DC82", "#FFEB87", "#FFAD78", "#F8696B"))+
+  theme(legend.position = "",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(size = 9, angle=60, hjust=1),
+        axis.text.y = element_text(size = 9),
+        axis.title.y = element_text(size = 14),
+        axis.title.x = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5))
+```
+
+\vspace{30pt}
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/pic1.jpg")
+```
+
+\newpage 
+##Improvements to the course:
+
+Thank you Melly for actively helping with the improvements mentioned in Level 2.
+
+###Goals
+Would it be beneficial to have the women set personal goals? My thought on this is two sided:
+On one side, it could encourage them to work towards a specific outcome and feel empowered when they have accomplished it.On the other hand, I do not want the women to feel this is a way to monitor them, but more rather to push them towards success. We want to support their growth as much as possible without causing more stress for them.
+
+Example goals: 
+
+1. Have a phone conversation in English
+
+2. Speak in as much English as possible at work twice a week
+
+3. Write an email in English
+
+4. Learn 3 new vocabulary words a day for 1 month
+
+
+###Practice:
+Extra practice could tie in with the previous mention of goals. Ultimately, learning a language is very difficult and not going to be an easy process. The more the students learn, the more there will be a need for continuous practice of the language.
+
+I don't think this completely needs to come from us, I think self-directed learning and practice is very important. But I wonder if we can facilitate the importance of practice by encouraging them to set goals to frequently practice using the language in their spare time.
+\vspace{7pt}
+
+##What other opportunities would be a priority? 
+
+1.More opportunities and/or push for practice: Study sessions, conversion at work  
+
+2.Empowerment and confidence opportunities  
+
+3.Future Projects: Learn other languages, computer classes, professional development classes, or leadership.  
+\vspace{7pt}
+
+##Concerns: 
+
+###Attendance: 
+Melly, could you please send a roll call to us with each lot of surveys so we have an idea of how many students are attending each week? 
+
+If this can be done anonymously so the students don't feel too pressured that would be ideal. We know who fills out the survey, but it's unsure how frequently each student attends and knowing this information would allow us to better gauge her learning progression. 
+
+
+
+\newpage 
+\thispagestyle{empty}
+\centering
+```{r, echo=FALSE, results = "asis"}
+cat("\\newgeometry{left=.5cm,right=.5cm,top=.5cm,bottom=.5cm}")
+knitr::include_graphics("/Users/megancapriccio/Desktop/SGBG/Vikera/Philanthropy/English_Classes/English_Classes_Surveys/Responses/backcover.jpg")
+cat("\\restoregeometry")
+```
+
