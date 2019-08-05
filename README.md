@@ -5,9 +5,9 @@ This repository contains slides and materials from the RLadies Sydney Birthday l
 
 Co-founder Lisa Williams kicked off the night with a [recap](https://github.com/jenrichmond/RLadiesSydneyBirthday/blob/master/slides_code/year%20in%20review.pptx). It has been a busy year. 
 
-See our [speaker line up here](https://jenrichmond.github.io/RLadiesSydneyBirthday/#1)
+See our [speaker line up here](https://jenrichmond.github.io/RLadiesSydneyBirthday/#1).
 
-Slides for Sarah's [talk about useRconf](http://bit.ly/RLadies-Birthday) here
+Slides for Sarah's [talk about useRconf](http://bit.ly/RLadies-Birthday) here.
 
 Check out Chris Tham's [Multiplying in R script here](https://github.com/jenrichmond/RLadiesSydneyBirthday/blob/master/slides_code/multiplication_R.R). 
 
@@ -19,5 +19,5 @@ Megan Capriccio is a RMarkdown whiz. Check out an example of the reports she mak
 
 Belinda Fabian is a R beginner, but has been teaching other beginners at MacqUni. Check out her [slides here](https://github.com/jenrichmond/RLadiesSydneyBirthday/blob/master/slides_code/FABIAN_RLadiesSyd_Rmicrobiome_Jul2019.pptx). 
 
-Slides for Jen's [talk about silly things starting with the letter M](https://jenrichmond.github.io/RLadiesSydneyBirthday/mmm/#1) here
+Slides for Jen's [talk about silly things starting with the letter M](https://jenrichmond.github.io/RLadiesSydneyBirthday/mmm/#1) here.
 
