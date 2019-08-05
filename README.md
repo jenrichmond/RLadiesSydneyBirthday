@@ -2,7 +2,6 @@
 
 This repository contains slides and materials from the RLadies Sydney Birthday lightning talk event July 31 2019. 
 
-![](/birthday/README_files/group.jpg)
 
 Co-founder Lisa Williams kicked off the night with a [recap](https://github.com/jenrichmond/RLadiesSydneyBirthday/blob/master/slides_code/year%20in%20review.pptx). It has been a busy year. 
 
